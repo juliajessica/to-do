@@ -1,9 +1,12 @@
 // business logic
-function List (newTask, taskNumber) {
+
+function List (newTask) {
   this.task = newTask;
   // this.id = taskNumber;
+
 }
 List.prototype.finalResult = function() {
+
   return this.task;
   // + " " + this.id;
 }
@@ -11,23 +14,43 @@ List.prototype.finalResult = function() {
 
 //user logic
 $(document).ready(function() {
-  $('form#toDoList').submit(function(event) {
+  $('form#toDoList').submit(function(event) {  //pushing resutls to html
     event.preventDefault();
 
-    var inputToDo = $("label#enter-what-to-do").val(); // var linking to html
-    // var inputErrands = $("#").val();
-
+    var inputToDo = $("input#textInput").val(); // var linking to html
     var newList = new List(inputToDo); //variable linking to protoype
 
-    $("ul#contacts").append("<li><span class='contact'>" + newContact.fullName() + "</span></li>");
+    $("ul#showList").append("<li id='" + newList.finalResult() + "'>" + newList.finalResult() + ' ' + ' '  + '<input type="checkbox" id="clickBox" value="' + newList.finalResult() + '" name="itemSelected">' + ' ' + ' ' + "</li>");
 
-    if (inputToDo = ) {
-      //debugger;
-      $("#showList h2").text("To do:");
-      $(".finalResult").text(inputToDo.food);
-    } else {
-      console.log();
-    }
+    $('form#listFromUser').submit(function(event) {//taking results, allowing checked, and submitting to be removed
+      event.preventDefault();
+      $("input:checkbox[name=itemSelected]:checked").each(function(){
+      var eachItem = $(this).val();
+      console.log(eachItem);
+      $("#" + eachItem).fadeOut();
+
+    }); //closing second function
+  // var parent
+  // var child
+
+
+  }); //close form
+}); //close function
+
+});
+
+
+
+
+
+ //close second form
+    // if (inputToDo = ) {
+    //   //debugger;
+    //   $("#showList h2").text("To do:");
+    //   $(".showList").text(inputToDo.food);
+    // } else {
+    //   console.log();
+    // }
 
 
       // $('ul').prepend("<li>"+item.val()+"</li>");
@@ -36,5 +59,3 @@ $(document).ready(function() {
         // $(this).remove();
 
         // $('#chkb-unchecked').checkbox();
-  });
-});
